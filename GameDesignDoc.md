@@ -58,19 +58,19 @@
     * etc.
 
 ## User Interface
-Image of UI:
-![game_duvoisin](photo.JPG "User Interface")
+![game_duvoisin](userinterface.JPG "User Interface")
 The UI is simple and intuitive:
   + On the title screen, there will be three buttons: Start, Controls, and Quit.
     * Start: Starts the game.
     * Controls: Goes to the Controls Screen.
     * Quit: Quits the game.
   + The Controls Screen contains a description of the controls, along with a Back button that returns you to the Main Menu.
+  + When the Start button is pressed, the user is prompted to enter his/her name. The game begins when the Start Game button is pressed.
   + Once the game has started, the user interface consists of two buttons: Pause (P) and Quit.
     * Pause (P): Pauses the game. Can also press P to pause.
     * Quit: Quits the game.
-  + In addition, in the HUD for the game, vital information is displayed: Score, Combo, Level, and Lives.
+  + In addition, in the HUD for the game, vital information is displayed: User, Score, Combo, Level, and Lives.
     * Self-explainatory.
-  + Once the user loses the game (as it will eventually speed up to the point where it is humanly impossible to continue playing), the Game Over screen will appear, and will display the player's final score along with two buttons: Main Menu and Quit.
+  + Once the user loses the game (as it will eventually speed up to the point where it is humanly impossible to continue playing), the Game Over screen will appear, and will display the player's name and final score along with two buttons: Main Menu and Quit.
     * Main Menu: Returns the user to the Main Menu.
     * Quit: Quits the game.
