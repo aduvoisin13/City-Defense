@@ -1,4 +1,5 @@
 # Game Design Document
+The premise for this game is simple: you, controlling your ship, are responsible for defending your city from an alien invasion.
 
 ## 'Things'
   1. City
@@ -58,6 +59,8 @@
     * etc.
 
 ## User Interface
+Image of UI:
+
 ![game_duvoisin](userinterface.JPG "User Interface")
 
 The UI is simple and intuitive:
