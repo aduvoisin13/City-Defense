@@ -1,5 +1,7 @@
 # Game Design Document
-The premise for this game is simple: you, controlling your ship, are responsible for defending your city from an alien invasion.
+
+## Overview
+The premise for this (currently untitled) game is simple: you, controlling your ship, are responsible for defending your city from an alien invasion. Your city is positioned at the bottom of the screen, with your ship located immediately above it. Your ship may only move horizontally and shoot upwards at the enemy aliens. If any of the three types of aliens (detailed below) get past your ship and begin ravaging your city, you lose one of your three lives. However, the ship itself is invulnerable to alien attacks, allowing for clutch last second defenses. Points are awarded for successfully shooting aliens and a bonus blimp; even more points are awarded for consecutive hits (combos). The game continues indefinitely, slowly increasing its speed over time. When you lose all of your lives... game over!
 
 ## 'Things'
   1. City
@@ -12,7 +14,7 @@ The premise for this game is simple: you, controlling your ship, are responsible
     * Visual: The fast enemy will look like a small and dextrious alien. The enemy will look the part (in that it will be very obvious that he can move fast and die easily).
   1. Slow Enemy
     * Moving.
-    * Function: The slow enemy will start at the top of the screen and slowly make its way down to the city, in a straight line. The slow enemy dies in 3-5 shots. In order to defeat this enemy, the player must spend valuable time to shoot him multiple times in order to kill him before he reaches the city.
+    * Function: The slow enemy will start at the top of the screen and slowly make its way down to the city, in a mostly straight line, but sometimes straying from its path. The slow enemy dies in 3-5 shots. In order to defeat this enemy, the player must spend valuable time to shoot him multiple times in order to kill him before he reaches the city.
     * Visual: The slow enemy will look like a fat and hunkering alien. The enemy will look the part (in that it will be very obvious that he moves slow and requires multiple shots to kill).
   1. Bouncing Enemy
     * Moving.
