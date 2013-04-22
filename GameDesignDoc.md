@@ -59,6 +59,7 @@
 
 ## User Interface
 ![game_duvoisin](userinterface.JPG "User Interface")
+
 The UI is simple and intuitive:
   + On the title screen, there will be three buttons: Start, Controls, and Quit.
     * Start: Starts the game.
