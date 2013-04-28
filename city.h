@@ -1,12 +1,11 @@
 #ifndef CITY_H
 #define CITY_H
 
-#include "thing.h"
+#include <QGraphicsPixmapItem>
 
-class City : public Thing {
+class City : public QGraphicsPixmapItem {
 	public:
 	City();
-	void move();
 };
 
 #endif

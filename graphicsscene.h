@@ -15,6 +15,7 @@ class GraphicsScene : public QGraphicsScene {
 	public:
 	GraphicsScene(MainWindow* mainWindow);
 	void keyPressEvent(QKeyEvent *e);
+	void keyReleaseEvent(QKeyEvent *e);
 	
 	private:
 	MainWindow* mw;

@@ -5,7 +5,11 @@
 
 class FastEnemy : public Thing {
 	public:
+	FastEnemy();
 	void move();
+	void animate(int);
+	void setShotsToKill(int);
+	int getShotsToKill();
 	private:
 };
 

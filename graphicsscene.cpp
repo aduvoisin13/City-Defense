@@ -5,5 +5,19 @@ GraphicsScene::GraphicsScene(MainWindow* mainWindow) {
 }
 
 void GraphicsScene::keyPressEvent(QKeyEvent *e) {
-	mw->handleKey(e);
+	if(e->key() == Qt::Key_Left)
+		mw->setKeyLeft(true);
+	if(e->key() == Qt::Key_Right)
+		mw->setKeyRight(true);
+	if(e->key() == Qt::Key_Space)
+		mw->setKeySpace(true);
+}
+
+void GraphicsScene::keyReleaseEvent(QKeyEvent *e) {
+	if(e->key() == Qt::Key_Left)
+		mw->setKeyLeft(false);
+	if(e->key() == Qt::Key_Right)
+		mw->setKeyRight(false);
+	if(e->key() == Qt::Key_Space)
+		mw->setKeySpace(false);
 }

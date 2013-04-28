@@ -4,6 +4,13 @@
 #include "thing.h"
 
 class SlowEnemy : public Thing {
+	public:
+	SlowEnemy();
+	void move();
+	void animate(int);
+	void setShotsToKill(int);
+	int getShotsToKill();
+	private:
 };
 
 #endif
