@@ -31,7 +31,7 @@ MainWindow::MainWindow() {
     background->setPixmap(QPixmap("background.png"));
     scene->addItem(background);
     
-	city = new City();
+	city = new QGraphicsPixmapItem();
 	city->setPixmap(QPixmap("city.png"));
 	scene->addItem(city);
 	city->setPos(0, WINDOW_Y - 114);
@@ -226,7 +226,7 @@ void MainWindow::start() {
 		connect(createTimer, SIGNAL(timeout()), this, SLOT(handleCreateTimer()));
 		createTimer->start();
 	
-		player = new Player();
+		player = new QGraphicsPixmapItem();
 		player->setPixmap(QPixmap("shipidle.png"));
 		scene->addItem(player);
 		player->setPos(WINDOW_X / 2 - (player->pixmap().width() / 2), WINDOW_Y - 145);
@@ -326,7 +326,7 @@ void MainWindow::handleMoveTimer() {
 		player->setPixmap(QPixmap("shipidle.png"));
 	
 	if(keySpace && !prevKeySpace) {
-		Bullet* bullet = new Bullet();
+		QGraphicsPixmapItem* bullet = new QGraphicsPixmapItem();
 		bullet->setPixmap(QPixmap("bullet.png"));
 		scene->addItem(bullet);
 		bullet->setPos(player->x() + (player->pixmap().width() / 2) - 3, player->y());
@@ -357,7 +357,7 @@ void MainWindow::handleMoveTimer() {
 		}
 	}
 	for(unsigned int i = 0; i < bullets.size(); i++) {
-		bullets[i]->move();
+		bullets[i]->moveBy(0, -20);
 		if((bullets[i]->y() + bullets[i]->pixmap().height()) < 0) {
 			combo = 1;
 			delete bullets[i];

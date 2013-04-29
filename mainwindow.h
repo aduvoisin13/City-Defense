@@ -28,11 +28,8 @@
 #include "fastenemy.h"
 #include "slowenemy.h"
 #include "bouncingenemy.h"
-#include "player.h"
 #include "blimp.h"
-#include "city.h"
 #include "graphicsscene.h"
-#include "bullet.h"
 
 #define WINDOW_X 300
 #define WINDOW_Y 500
@@ -71,13 +68,13 @@ private:
     /** Gameplay timer. */
     QTimer *moveTimer, *createTimer;
     /** The city. */
-    City *city;
+    QGraphicsPixmapItem *city;
     /** The player. */
-    Player *player;
+    QGraphicsPixmapItem *player;
     /** Vector of all enemies. */
     vector<Thing*> enemies;
     /** Vector of all bullets. */
-    vector<Bullet*> bullets;
+    vector<QGraphicsPixmapItem*> bullets;
     /** Keeps track of whether a key is being pressed or not. */
     bool keyLeft, keyRight, keySpace, prevKeySpace;
     /** The background. */
