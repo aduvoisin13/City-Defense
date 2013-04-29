@@ -6,10 +6,12 @@
 class BouncingEnemy : public Thing {
 	public:
 	BouncingEnemy();
-	void move();
+	void move(int speedMult);
 	void animate(int);
-	void setShotsToKill(int);
-	int getShotsToKill();
+	bool isDead();
+	void decreaseShotsToKill();
+	int scoreHit();
+	int scoreKilled();
 	private:
 };
 

@@ -7,15 +7,21 @@ BouncingEnemy::BouncingEnemy() {
 	shotsToKill = 1;
 }
 
-void BouncingEnemy::move() {
-	moveBy(xv, yv);
-	if(x() < 0 || x() > 300 - pixmap().width())
+void BouncingEnemy::move(int speedMult) {
+	moveBy(xv * speedMult, yv * speedMult);
+	if(x() < 0 || x() > 300 - pixmap().width()) {
 		xv *= -1;
+		if(x() > 300 - pixmap().width())
+			setX(300 - pixmap().width());
+	}
 }
 
 void BouncingEnemy::animate(int time) {
 	
 }
 
-void BouncingEnemy::setShotsToKill(int stk) { shotsToKill = stk; }
-int BouncingEnemy::getShotsToKill() { return shotsToKill; }
+bool BouncingEnemy::isDead() { return (shotsToKill == 0); }
+void BouncingEnemy::decreaseShotsToKill() { shotsToKill--; }
+
+int BouncingEnemy::scoreHit() { return 0; }
+int BouncingEnemy::scoreKilled() { return 500; }
