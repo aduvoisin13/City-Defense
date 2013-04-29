@@ -9,6 +9,7 @@ MainWindow::MainWindow() {
 	prevKeySpace = false;
 	paused = false;
 	started = false;
+	gameOver = false;
 	
 	numMoveTicks = 0;
 	speedMult = 1;
@@ -142,6 +143,7 @@ void MainWindow::start() {
 		keySpace = false;
 		prevKeySpace = false;
 		paused = false;
+		gameOver = false;
 
 		numMoveTicks = 0;
 		speedMult = 1;
@@ -241,14 +243,16 @@ void MainWindow::start() {
  * @return Nothing.
  */
 void MainWindow::pause() {
-	if(paused) {
-		moveTimer->start();
-		createTimer->start();
-		paused = false;
-	} else {
-		moveTimer->stop();
-		createTimer->stop();
-		paused = true;
+	if(!gameOver) {
+		if(paused) {
+			moveTimer->start();
+			createTimer->start();
+			paused = false;
+		} else {
+			moveTimer->stop();
+			createTimer->stop();
+			paused = true;
+		}
 	}
 }
 
@@ -269,6 +273,7 @@ void MainWindow::endGame() {
 		bullets.erase(bullets.begin());
 	}
 	player->setPos(-50, -50);
+	gameOver = true;
 }
 
 /** Slot that quits the game. Called when the Quit

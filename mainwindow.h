@@ -84,7 +84,7 @@ private:
     /** The speed multiplier, for enemy movement speed. */
     double speedMult;
     /** Boolean values for whether the game has been started/paused or not. */
-    bool started, paused;
+    bool started, paused, gameOver;
     /** Textboxes needed for the menu and getting the username. */
     QTextEdit *menu, *unPrompt, *userName;
     /** Textboxes needed for the HUD. */
