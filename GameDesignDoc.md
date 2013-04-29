@@ -1,28 +1,32 @@
 # Game Design Document
 
 ## Overview
-The premise for this (currently untitled) game is simple: you, controlling your ship, are responsible for defending your city from an alien invasion. Your city is positioned at the bottom of the screen, with your ship located immediately above it. Your ship may only move horizontally and shoot upwards at the enemy aliens. If any of the three types of aliens (detailed below) get past your ship and begin ravaging your city, you lose one of your three lives. However, the ship itself is invulnerable to alien attacks, allowing for clutch last second defenses. Points are awarded for successfully shooting aliens and a bonus blimp; even more points are awarded for consecutive hits (combos). The game continues indefinitely, slowly increasing its speed over time. When you lose all of your lives... game over!
+The premise for City Defense is simple: you, controlling your ship, are responsible for defending your city from an alien invasion. Your city is positioned at the bottom of the screen, with your ship located immediately above it. Your ship may only move horizontally and shoot upwards at the enemy aliens. If any of the three types of aliens (detailed below) get past your ship and begin ravaging your city, you lose one of your three lives. **However, the ship itself is invulnerable to alien attacks, allowing for clutch last second defenses.** Points are awarded for successfully shooting aliens and a bonus blimp; even more points are awarded for consecutive hits (combos). The game continues indefinitely, slowly increasing its speed over time. When you lose all of your lives... game over!
 
 ## 'Things'
   1. City
     * Nonmoving.
     * Function: The city, located (and spanning) the bottom of the screen, is what the player is defending. If any enemy gets past the player's ship and the city takes damage, then the player will lose a life.
     * Visual: The city will look like a metropolitan city (high rise buildings and such), and will be very easily identifiable. It will span the bottom of the playing field.
+  1. Bullet
+  	* Moving.
+  	* Function: The bullet is created whenever the player presses the space bar. One bullet is created per space bar press. This is the means by which the player destroys aliens and defends the city.
+  	* Visual: The bullet will very obviously look like a bullet, and will travel upwards at a high velocity.
   1. Fast Enemy
     * Moving.
     * Function: The fast enemy will start at the top of the screen and quickly make its way down to the city, in a straight line. In order to defeat this enemy, the player must react quickly before he reaches the city. The fast enemy is fragile; he dies in one shot.
-    * Visual: The fast enemy will look like a small and dextrious alien. The enemy will look the part (in that it will be very obvious that he can move fast and die easily).
+    * Visual: The fast enemy will look like a small and dextrious alien/bug. The enemy will look the part (in that it will be very obvious that he can move fast and die easily).
   1. Slow Enemy
     * Moving.
-    * Function: The slow enemy will start at the top of the screen and slowly make its way down to the city, in a mostly straight line, but sometimes straying from its path. The slow enemy dies in 3-5 shots. In order to defeat this enemy, the player must spend valuable time to shoot him multiple times in order to kill him before he reaches the city.
-    * Visual: The slow enemy will look like a fat and hunkering alien. The enemy will look the part (in that it will be very obvious that he moves slow and requires multiple shots to kill).
+    * Function: The slow enemy will start at the top of the screen and slowly make its way down to the city, in a mostly straight line, but sometimes straying from its path. The slow enemy dies in 3 shots. In order to defeat this enemy, the player must spend valuable time to shoot him multiple times in order to kill him before he reaches the city.
+    * Visual: The slow enemy will look like a fat and hunkering alien/bug. The enemy will look the part (in that it will be very obvious that he moves slow and requires multiple shots to kill).
   1. Bouncing Enemy
     * Moving.
     * Function: The bouncing enemy will start at the top of the screen and make its way down to the city at a moderate speed while bouncing from side to side off of the edges of the screen. In order to defeat this enemy, the player must correctly time his shots to collide with the enemy at the right moment. The bouncing enemy dies in 1 shot.
-    * Visual: The bouncing enemy will look like a moderately sized alien, likely with longer legs to indicate his bouncing ability. In addition, he will look the way he is moving, since he will be moving in a zigzag-like pattern to the bottom of the screen. The enemy will look the part (in that it will be very obvious that he moves in a bouncing pattern and requires one shot to kill).
+    * Visual: The bouncing enemy will look like a moderately sized alien/bug with tentacles that indicate its ability to bounce. The enemy will look the part (in that it will be very obvious that he moves in a bouncing pattern and requires one shot to kill).
   1. Blimp
     * Moving.
-    * Function: The blimp offers the player a chance to score bonus points. The blimp simply flies across the top of the screen at random times, and if the player shoots the blimp, he will score a large amount of bonus points. If the player does not shoot the blimp, however, no penalty will be inflicted.
+    * Function: The blimp offers the player a chance to score bonus points. The blimp simply flies across the top of the screen at random times, and if the player shoots the blimp, he will score a large amount of bonus points. If the player does not shoot the blimp, however, no penalty will be inflicted. It is destroyed when it hits the other side of the screen.
     * Visual: The blimp will look like a cartoony blimp. It will look its part (in that it's obvious that the blimp offers extra points, but does not damage the player if it's missed).
 
 ## Controls
@@ -52,13 +56,14 @@ The premise for this (currently untitled) game is simple: you, controlling your 
 ## Lives
   + The player will start out with 3 lives.
   + Whenever any kind of enemy gets past the player's ship and hits the city, the player will lose one life.
-  + The game ends when the player's lives hit 0.
-  + Note: Time permitting, the player will gain an extra life at specified intervals in scoring. For example:
+  + The player obtains an extra life beginning at 100,000 points, with the threshold doubled every time it is hit. For example:
     * Extra life at 100,000 points.
-    * Extra life at 250,000 points.
-    * Extra life at 500,000 points.
-    * Extra life at 1,000,000 points.
+    * Extra life at 200,000 points.
+    * Extra life at 400,000 points.
+    * Extra life at 800,000 points.
     * etc.
+  + The game ends when the player's lives hit 0.
+  + **Note: The ship itself does not take damage; the game is about saving the city and its citizens as opposed to worrying about the ship.**
 
 ## User Interface
 Image of UI:
@@ -66,17 +71,12 @@ Image of UI:
 ![game_duvoisin](userinterface.JPG "User Interface")
 
 The UI is simple and intuitive:
-  + On the title screen, there will be three buttons: Start, Controls, and Quit.
-    * Start: Starts the game.
-    * Controls: Goes to the Controls Screen.
+  + On the left, the game will be displayed. The UI will be to the right of the game.
+  + At the top, there will be a menu with three buttons: Start, Pause, and Quit.
+    * Start: Starts the game. Switches to 'Restart' once the game has begun. Only begins the game if a name is entered.
+    * Pause: Pauses the game.
     * Quit: Quits the game.
-  + The Controls Screen contains a description of the controls, along with a Back button that returns you to the Main Menu.
-  + When the Start button is pressed, the user is prompted to enter his/her name. The game begins when the Start Game button is pressed.
-  + Once the game has started, the user interface consists of two buttons: Pause (P) and Quit.
-    * Pause (P): Pauses the game. Can also press P to pause.
-    * Quit: Quits the game.
-  + In addition, in the HUD for the game, vital information is displayed: User, Score, Combo, Level, and Lives.
+  + Below the menu, the user will be able to enter his name before the game starts. After the game begins for the first time, the name cannot be changed, and will remain displayed.
+  + Below the user's name, the vital HUD information will be displayed: Combo, Score, Lives, and Level.
     * Self-explainatory.
-  + Once the user loses the game (as it will eventually speed up to the point where it is humanly impossible to continue playing), the Game Over screen will appear, and will display the player's name and final score along with two buttons: Main Menu and Quit.
-    * Main Menu: Returns the user to the Main Menu.
-    * Quit: Quits the game.
+  + Once the user loses the game (as it will eventually speed up to the point where it is humanly impossible to continue playing), a small 'Game Over' message will appear. The user's score will remain displayed in the HUD, if the player wishes to see what his final score is. Just as with any other point in the game, the menu buttons will be available to Restart or Quit the game.
