@@ -5,8 +5,8 @@ SlowEnemy::SlowEnemy() {
 	shotsToKill = 3;
 }
 
-void SlowEnemy::move() {
-	moveBy(0, 1);
+void SlowEnemy::move(int speedMult) {
+	moveBy(0, 1 * speedMult);
 }
 
 void SlowEnemy::animate(int time) {
@@ -21,5 +21,8 @@ void SlowEnemy::animate(int time) {
 	}
 }
 
-void SlowEnemy::setShotsToKill(int stk) { shotsToKill = stk; }
-int SlowEnemy::getShotsToKill() { return shotsToKill; }
+bool SlowEnemy::isDead() { return (shotsToKill == 0); }
+void SlowEnemy::decreaseShotsToKill() { shotsToKill--; }
+
+int SlowEnemy::scoreHit() { return 100; }
+int SlowEnemy::scoreKilled() { return 0; }
