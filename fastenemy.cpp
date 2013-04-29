@@ -5,19 +5,24 @@ FastEnemy::FastEnemy() {
 	shotsToKill = 1;
 }
 
-void FastEnemy::move() {
-	moveBy(0, 4);
+void FastEnemy::move(int speedMult) {
+	moveBy(0, 4 * speedMult);
 }
 
 void FastEnemy::animate(int time) {
-	if(currentFrame == 0) {
-		setPixmap(QPixmap("fast2.png"));
-		currentFrame = 1;
-	} else {
-		setPixmap(QPixmap("fast1.png"));
-		currentFrame = 0;
+	if(time % 2 == 0) {
+		if(currentFrame == 0) {
+			setPixmap(QPixmap("fast2.png"));
+			currentFrame = 1;
+		} else {
+			setPixmap(QPixmap("fast1.png"));
+			currentFrame = 0;
+		}
 	}
 }
 
-void FastEnemy::setShotsToKill(int stk) { shotsToKill = stk; }
-int FastEnemy::getShotsToKill() { return shotsToKill; }
+bool FastEnemy::isDead() { return (shotsToKill == 0); }
+void FastEnemy::decreaseShotsToKill() { shotsToKill--; }
+
+int FastEnemy::scoreHit() { return 0; }
+int FastEnemy::scoreKilled() { return 500; }
