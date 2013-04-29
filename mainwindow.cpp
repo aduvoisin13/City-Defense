@@ -389,9 +389,9 @@ void MainWindow::handleMoveTimer() {
 	
 	numMoveTicks++;
 	
-	if(numMoveTicks == 500) {
-		speedMult += .5;
-		createTimer->setInterval(createTimer->interval() * .75);
+	if(numMoveTicks == 750) {
+		speedMult += .65;
+		createTimer->setInterval(createTimer->interval() * .8);
 		numMoveTicks = 0;
 		level++;
 	}
@@ -409,9 +409,14 @@ void MainWindow::handleMoveTimer() {
 	scoreText->setText("Score: " + temp);
 	scoreText->setAlignment(Qt::AlignCenter);
 	
-	temp = QString::number(lives);
-	livesText->setText("Lives: " + temp);
-	livesText->setAlignment(Qt::AlignCenter);
+	if(lives > 0) {
+		temp = QString::number(lives);
+		livesText->setText("Lives: " + temp);
+		livesText->setAlignment(Qt::AlignCenter);
+	} else {
+		livesText->setText("Game Over!");
+		livesText->setAlignment(Qt::AlignCenter);
+	}
 	
 	temp = QString::number(level);
 	levelText->setText("Level: " + temp);
