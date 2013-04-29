@@ -18,7 +18,7 @@ The premise for City Defense is simple: you, controlling your ship, are responsi
     * Visual: The fast enemy will look like a small and dextrious alien/bug. The enemy will look the part (in that it will be very obvious that he can move fast and die easily).
   1. Slow Enemy
     * Moving.
-    * Function: The slow enemy will start at the top of the screen and slowly make its way down to the city, in a mostly straight line, but sometimes straying from its path. The slow enemy dies in 3 shots. In order to defeat this enemy, the player must spend valuable time to shoot him multiple times in order to kill him before he reaches the city.
+    * Function: The slow enemy will start at the top of the screen and slowly make its way down to the city in a straight line. The slow enemy dies in 3 shots. In order to defeat this enemy, the player must spend valuable time to shoot him multiple times in order to kill him before he reaches the city.
     * Visual: The slow enemy will look like a fat and hunkering alien/bug. The enemy will look the part (in that it will be very obvious that he moves slow and requires multiple shots to kill).
   1. Bouncing Enemy
     * Moving.
