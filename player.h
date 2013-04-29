@@ -3,8 +3,11 @@
 
 #include <QGraphicsPixmapItem>
 
+/** Class that handles everything that has to
+ * do with the main player. */
 class Player : public QGraphicsPixmapItem {
 	public:
+	/** Default constructor. */
 	Player();
 };
 
