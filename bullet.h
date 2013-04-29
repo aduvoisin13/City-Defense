@@ -3,10 +3,12 @@
 
 #include <QGraphicsPixmapItem>
 
+/** Class that handles the creation and movement
+ * of each Bullet. */
 class Bullet : public QGraphicsPixmapItem {
 	public:
+	/** Moves the bullet. */
 	void move();
-	private:
 };
 
 #endif
