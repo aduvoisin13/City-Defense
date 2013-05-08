@@ -31,11 +31,13 @@ MainWindow::MainWindow() {
 	background = new QGraphicsPixmapItem();
     background->setPixmap(QPixmap("background.png"));
     scene->addItem(background);
+    background->setZValue(-1);
     
 	city = new QGraphicsPixmapItem();
 	city->setPixmap(QPixmap("city.png"));
 	scene->addItem(city);
 	city->setPos(0, WINDOW_Y - 114);
+	city->setZValue(-1);
 	
 	menu = new QTextEdit(view);
 	menu->setFontUnderline(true);
@@ -138,6 +140,9 @@ void MainWindow::show() {
  */
 void MainWindow::start() {
 	if(started) {
+		background->setPixmap(QPixmap("background.png"));
+		city->setPixmap(QPixmap("city.png"));
+		
 		keyLeft = false;
 		keyRight = false;
 		keySpace = false;
@@ -399,6 +404,14 @@ void MainWindow::handleMoveTimer() {
 		createTimer->setInterval(createTimer->interval() * .8);
 		numMoveTicks = 0;
 		level++;
+		if(level == 2) {
+			background->setPixmap(QPixmap("background2.png"));
+			city->setPixmap(QPixmap("city2.png"));
+		}
+		if(level == 3) {
+			background->setPixmap(QPixmap("background3.png"));
+			city->setPixmap(QPixmap("city3.png"));
+		}
 	}
 	
 	if(score > extraLife) {
