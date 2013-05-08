@@ -61,6 +61,10 @@ MainWindow::MainWindow() {
 	quitButton->move(WINDOW_X + 8, 90);
     connect(quitButton, SIGNAL(clicked()), this, SLOT(quit()));
     
+    highScoreButton = new QPushButton("High Scores", view);
+	highScoreButton->move(WINDOW_X + 2, 470);
+    connect(highScoreButton, SIGNAL(clicked()), this, SLOT(toggleHighScores()));
+    
     unPrompt = new QTextEdit(view);
     unPrompt->setTextColor(QColor(Qt::red));
     unPrompt->setText("To Start, Enter Name:");
@@ -116,6 +120,45 @@ MainWindow::MainWindow() {
 	levelText->setAlignment(Qt::AlignCenter);
 	levelText->setReadOnly(true);
 	levelText->setFrameStyle(QFrame::NoFrame);
+	
+	ifstream fin("highscores.txt");
+	if(fin) {
+		HighScore temp;
+		fin >> temp.score;
+		while(!fin.eof()) {
+			fin.ignore(1, ' ');
+			getline(fin, temp.name);
+			highScores.push_back(temp);
+			fin >> temp.score;
+		}
+	} else {
+		HighScore temp;
+		temp.name = "Computer Player";
+		for(int i = 10; i > 0; i--) {
+			temp.score = i * 10000;
+			highScores.push_back(temp);
+		}
+	}
+	
+	highScoreText = new QTextEdit(view);
+	highScoreText->setText("High Scores:");
+	highScoreText->move(1, 1);
+	highScoreText->resize(WINDOW_X, WINDOW_Y - 305);
+	highScoreText->setAlignment(Qt::AlignCenter);
+	highScoreText->setReadOnly(true);
+	highScoreText->setFrameStyle(QFrame::NoFrame);
+	QString hsText;
+	for(int i = 0; i < 10; i++) {
+		hsText.append(QString::fromStdString("#"));
+		hsText.append(QString::number(i + 1));
+		hsText.append(QString::fromStdString("    -    "));
+		hsText.append(QString::number(highScores[i].score));
+		hsText.append(QString::fromStdString("    -    "));
+		hsText.append(QString::fromStdString(highScores[i].name));
+		if(i != 9)
+			hsText.append(QString::fromStdString("\n"));
+	}
+	highScoreText->append(hsText);
 }
 
 /** Default destructor. */
@@ -193,6 +236,8 @@ void MainWindow::start() {
 			createTimer->start();
 		createTimer->setInterval(2000);
 		
+		highScoreText->setVisible(false);
+		
 		view->setFocus();
 	} else if(userName->toPlainText() != "") {
 		started = true;
@@ -237,7 +282,9 @@ void MainWindow::start() {
 		player->setPixmap(QPixmap("shipidle.png"));
 		scene->addItem(player);
 		player->setPos(WINDOW_X / 2 - (player->pixmap().width() / 2), WINDOW_Y - 145);
-	
+		
+		highScoreText->setVisible(false);
+		
 		view->setFocus();
 	}
 }
@@ -259,6 +306,7 @@ void MainWindow::pause() {
 			paused = true;
 		}
 	}
+	view->setFocus();
 }
 
 /** Function that ends the game. Called when all
@@ -279,6 +327,40 @@ void MainWindow::endGame() {
 	}
 	player->setPos(-50, -50);
 	gameOver = true;
+	
+	int hsIndex = 10;
+	while(score > highScores[hsIndex - 1].score) {
+		hsIndex--;
+		if(hsIndex == 0) break;
+	}
+	if(hsIndex != 10) {
+		for(int i = 9; i > hsIndex; i--) {
+			highScores[i].score = highScores[i - 1].score;
+			highScores[i].name = highScores[i - 1].name;
+		}
+		highScores[hsIndex].score = score;
+		highScores[hsIndex].name = (userName->toPlainText()).toStdString();
+	}
+	ofstream fout("highscores.txt");
+	for(int i = 0; i < 10; i++)
+		fout << highScores[i].score << " " << highScores[i].name << endl;
+	fout.close();
+	
+	highScoreText->setText("High Scores:");
+	highScoreText->setAlignment(Qt::AlignCenter);
+	QString hsText;
+	for(int i = 0; i < 10; i++) {
+		hsText.append(QString::fromStdString("#"));
+		hsText.append(QString::number(i + 1));
+		hsText.append(QString::fromStdString("    -    "));
+		hsText.append(QString::number(highScores[i].score));
+		hsText.append(QString::fromStdString("    -    "));
+		hsText.append(QString::fromStdString(highScores[i].name));
+		if(i != 9)
+			hsText.append(QString::fromStdString("\n"));
+	}
+	highScoreText->append(hsText);
+	highScoreText->setVisible(true);
 }
 
 /** Slot that quits the game. Called when the Quit
@@ -288,6 +370,19 @@ void MainWindow::endGame() {
  */
 void MainWindow::quit() {
 	exit(0);
+}
+
+/** Slot that toggles high scores display. Called when the Toggle
+ * High Scores button is clicked.
+ *
+ * @return Nothing.
+ */
+void MainWindow::toggleHighScores() {
+	if(highScoreText->isVisible())
+		highScoreText->setVisible(false);
+	else
+		highScoreText->setVisible(true);
+	view->setFocus();
 }
 
 /** Sets the value of the left key. True = pressed, 
@@ -400,8 +495,10 @@ void MainWindow::handleMoveTimer() {
 	numMoveTicks++;
 	
 	if(numMoveTicks == 750) {
-		speedMult += .65;
-		createTimer->setInterval(createTimer->interval() * .8);
+		speedMult += (1.0 / level);
+		createTimer->setInterval(createTimer->interval() * .6);
+		if(createTimer->interval() < 1)
+			createTimer->setInterval(1);
 		numMoveTicks = 0;
 		level++;
 		if(level == 2) {

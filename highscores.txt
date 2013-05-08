@@ -1,0 +1,10 @@
+100000 Computer Player
+90000 Computer Player
+80000 Computer Player
+70000 Computer Player
+60000 Computer Player
+50000 Computer Player
+40000 Computer Player
+30000 Computer Player
+20000 Computer Player
+10000 Computer Player

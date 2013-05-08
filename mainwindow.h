@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -36,6 +37,13 @@
 #define VIEW_X 400
 
 class GraphicsScene;
+
+/** HighScore is a struct that contains all of the
+ * information needed for each High Score. */
+struct HighScore {
+	unsigned long score;
+	string name;
+};
 
 /** MainWindow handles all of the gameplay with Qt and
  * all other GUI-based entities in the program. */
@@ -93,6 +101,12 @@ private:
     int combo, lives, level;
     /** Elements to control the score. Displayed in the HUD. */
     unsigned long score, extraLife;
+    /** Vector of HighScore items that contains the 10 high scores. */
+    vector<HighScore> highScores;
+    /** High score textbox. */
+    QTextEdit *highScoreText;
+    /** High score button. */
+    QPushButton *highScoreButton;
 
 public slots:
 	/** Starts the game based on the inputs. Called when the start button is pressed. */
@@ -105,6 +119,8 @@ public slots:
 	void handleMoveTimer();
 	/** Creates enemies. */
 	void handleCreateTimer();
+	/** Toggles high scores display. */
+	void toggleHighScores();
 };
 
 #endif // MAINWINDOW_H
