@@ -22,6 +22,10 @@ class Thing : public QGraphicsPixmapItem {
 	virtual int scoreHit() = 0;
 	/** Increases the score when the thing is killed. */
 	virtual int scoreKilled() = 0;
+	/** Sets X Velocity. */
+	virtual void setXV(double) = 0;
+	/** Sets Y Velocity. */
+	virtual void setYV(double) = 0;
 	
 	protected:
 	/** Shots to kill the thing. */

@@ -1,21 +1,21 @@
-#ifndef BOUNCINGENEMY_H
-#define BOUNCINGENEMY_H
+#ifndef FOLLOWINGENEMY_H
+#define FOLLOWINGENEMY_H
 
 #include "thing.h"
 
 /** Class that handles every instance of
- * the bouncing enemy. Inherits from Thing. */
-class BouncingEnemy : public Thing {
+ * the following enemy. Inherits from Thing. */
+class FollowingEnemy : public Thing {
 	public:
 	/** Default constructor. */
-	BouncingEnemy();
-	/** Move the bouncing enemy. */
+	FollowingEnemy();
+	/** Move the following enemy. */
 	void move(int speedMult);
-	/** Animates the bouncing enemy's sprite. */
+	/** Animates the following enemy's sprite. */
 	void animate(int);
-	/** Is the bouncing enemy dead? */
+	/** Is the following enemy dead? */
 	bool isDead();
-	/** Decreases the shots to kill the bouncing enemy by one. */
+	/** Decreases the shots to kill the following enemy by one. */
 	void decreaseShotsToKill();
 	/** Increases the score when the enemy is hit. */
 	int scoreHit();

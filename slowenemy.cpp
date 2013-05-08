@@ -58,3 +58,15 @@ int SlowEnemy::scoreHit() { return 100; }
  * @return The increase in score that the player gets for killing the enemy.
  */
 int SlowEnemy::scoreKilled() { return 0; }
+
+/** Sets the X Velocity.
+ *
+ * @return Nothing.
+ */
+void SlowEnemy::setXV(double x) { xv = x; }
+
+/** Sets the Y Velocity.
+ *
+ * @return Nothing.
+ */
+void SlowEnemy::setYV(double y) { yv = y; }

@@ -58,3 +58,15 @@ int FastEnemy::scoreHit() { return 0; }
  * @return The increase in score that the player gets for killing the enemy.
  */
 int FastEnemy::scoreKilled() { return 500; }
+
+/** Sets the X Velocity.
+ *
+ * @return Nothing.
+ */
+void FastEnemy::setXV(double x) { xv = x; }
+
+/** Sets the Y Velocity.
+ *
+ * @return Nothing.
+ */
+void FastEnemy::setYV(double y) { yv = y; }

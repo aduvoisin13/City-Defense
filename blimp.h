@@ -21,6 +21,10 @@ class Blimp : public Thing {
 	int scoreHit();
 	/** Increases the score when the blimp is killed. */
 	int scoreKilled();
+	/** Sets the X Velocity. */
+	void setXV(double x);
+	/** Sets the Y Velocity. */
+	void setYV(double y);
 };
 
 #endif

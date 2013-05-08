@@ -4,7 +4,9 @@
 #include <cstdlib>
 #include <iostream>
 #include <iomanip>
+#include <typeinfo>
 #include <fstream>
+#include <cmath>
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -31,6 +33,8 @@
 #include "bouncingenemy.h"
 #include "blimp.h"
 #include "graphicsscene.h"
+#include "followingenemy.h"
+#include "enemybullet.h"
 
 #define WINDOW_X 300
 #define WINDOW_Y 500
@@ -41,7 +45,7 @@ class GraphicsScene;
 /** HighScore is a struct that contains all of the
  * information needed for each High Score. */
 struct HighScore {
-	unsigned long score;
+	long score;
 	string name;
 };
 
@@ -98,9 +102,9 @@ private:
     /** Textboxes needed for the HUD. */
     QTextEdit *hudText, *comboText, *scoreText, *livesText, *levelText;
     /** The values of various elements that control the game. Displayed in the HUD. */
-    int combo, lives, level;
+    double combo, lives, level;
     /** Elements to control the score. Displayed in the HUD. */
-    unsigned long score, extraLife;
+    long score, extraLife;
     /** Vector of HighScore items that contains the 10 high scores. */
     vector<HighScore> highScores;
     /** High score textbox. */

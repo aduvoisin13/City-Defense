@@ -1,14 +1,13 @@
-#include "bouncingenemy.h"
+#include "followingenemy.h"
 
 /** Default constructor.
  *
  * @return Nothing.
  */
-BouncingEnemy::BouncingEnemy() {
-	xv = -3;
-	yv = 1.5;
+FollowingEnemy::FollowingEnemy() {
 	currentFrame = 0;
 	shotsToKill = 1;
+	xv = 0;
 }
 
 /** Moves the enemy.
@@ -16,21 +15,16 @@ BouncingEnemy::BouncingEnemy() {
  * @param speedMult The speed multiplier; increases as the game progresses.
  * @return Nothing.
  */
-void BouncingEnemy::move(int speedMult) {
-	moveBy(xv * speedMult, yv * speedMult);
-	if(x() < 0 || x() > 300 - pixmap().width()) {
-		xv *= -1;
-		if(x() > 300 - pixmap().width())
-			setX(300 - pixmap().width());
-	}
+void FollowingEnemy::move(int speedMult) {
+	moveBy(xv, 1.5 * speedMult);
 }
 
-/** Animates the enemy. (Required Function)
+/** Animates the enemy.
  *
  * @param time The current time of the timer; used to determine animation.
  * @return Nothing.
  */
-void BouncingEnemy::animate(int time) {
+void FollowingEnemy::animate(int time) {
 	time++; // Needed for compiler.
 }
 
@@ -38,34 +32,34 @@ void BouncingEnemy::animate(int time) {
  *
  * @return True if dead, false if not.
  */
-bool BouncingEnemy::isDead() { return (shotsToKill == 0); }
+bool FollowingEnemy::isDead() { return (shotsToKill == 0); }
 
 /** Decreases the shots to kill the enemy.
  *
  * @return Nothing.
  */
-void BouncingEnemy::decreaseShotsToKill() { shotsToKill--; }
+void FollowingEnemy::decreaseShotsToKill() { shotsToKill--; }
 
 /** Returns the number of points that this enemy is worth when hit.
  *
  * @return The increase in score that the player gets for hitting the enemy.
  */
-int BouncingEnemy::scoreHit() { return 0; }
+int FollowingEnemy::scoreHit() { return 0; }
 
 /** Returns the number of points that this enemy is worth when killed.
  *
  * @return The increase in score that the player gets for killing the enemy.
  */
-int BouncingEnemy::scoreKilled() { return 500; }
+int FollowingEnemy::scoreKilled() { return 500; }
 
 /** Sets the X Velocity.
  *
  * @return Nothing.
  */
-void BouncingEnemy::setXV(double x) { xv = x; }
+void FollowingEnemy::setXV(double x) { xv = x; }
 
 /** Sets the Y Velocity.
  *
  * @return Nothing.
  */
-void BouncingEnemy::setYV(double y) { yv = y; }
+void FollowingEnemy::setYV(double y) { yv = y; }

@@ -49,3 +49,15 @@ int Blimp::scoreHit() { return 0; }
  * @return The increase in score that the player gets for destroying the blimp.
  */
 int Blimp::scoreKilled() { return 1000; }
+
+/** Sets the X Velocity.
+ *
+ * @return Nothing.
+ */
+void Blimp::setXV(double x) { xv = x; }
+
+/** Sets the Y Velocity.
+ *
+ * @return Nothing.
+ */
+void Blimp::setYV(double y) { yv = y; }

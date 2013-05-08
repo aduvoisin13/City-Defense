@@ -21,6 +21,10 @@ class SlowEnemy : public Thing {
 	int scoreHit();
 	/** Increases the score when the enemy is killed. */
 	int scoreKilled();
+	/** Sets X Velocity. */
+	void setXV(double);
+	/** Sets Y Velocity. */
+	void setYV(double);
 };
 
 #endif

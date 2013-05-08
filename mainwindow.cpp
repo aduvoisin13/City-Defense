@@ -443,22 +443,56 @@ void MainWindow::handleMoveTimer() {
 	for(unsigned int i = 0; i < enemies.size(); i++)
 		enemies[i]->animate(numMoveTicks);
 	
+	if(numMoveTicks % 75 == 0) {
+		for(unsigned int i = 0; i < enemies.size(); i++) {
+			if(typeid(*enemies[i]).name() == typeid(FollowingEnemy).name()) {
+				Thing* bullet = new EnemyBullet();
+				bullet->setPixmap(QPixmap("enemybullet.png"));
+				bullet->setPos(enemies[i]->x() + enemies[i]->pixmap().width() / 2, enemies[i]->y() + enemies[i]->pixmap().height());
+				bullet->setXV((player->x() + player->pixmap().width() / 2 - bullet->x()) / ((player->y() + player->pixmap().height() / 2 - bullet->y()) / 4));
+				scene->addItem(bullet);
+				enemies.push_back(bullet);
+			}
+		}
+	}
+	
 	for(unsigned int i = 0; i < enemies.size(); i++) {
+		if(typeid(*enemies[i]).name() == typeid(FollowingEnemy).name()) {
+			if(player->x() < enemies[i]->x())
+				enemies[i]->setXV(-2);
+			else if(player->x() > enemies[i]->x())
+				enemies[i]->setXV(2);
+			if(abs(player->x() - enemies[i]->x()) < 2)
+				enemies[i]->setXV(0);
+		}
 		enemies[i]->move(speedMult);
 		if(enemies[i]->x() + enemies[i]->pixmap().width() > WINDOW_X) {
 			delete enemies[i];
 			enemies.erase(enemies.begin() + i);
 			i--;
+			continue;
 		} else if((enemies[i]->y() > WINDOW_Y - city->pixmap().height() / 2) || (enemies[i]->y() > WINDOW_Y - enemies[i]->pixmap().height() - 10)) {
-			lives--;
-			if(lives == 0) {
-				endGame();
-				break;
+			if(typeid(*enemies[i]).name() != typeid(EnemyBullet).name()) {
+				lives--;
+				if(lives == 0) {
+					endGame();
+					break;
+				}
+				combo = 1;
+				delete enemies[i];
+				enemies.erase(enemies.begin() + i);
+				i--;
+				continue;
 			}
-			combo = 1;
-			delete enemies[i];
-			enemies.erase(enemies.begin() + i);
-			i--;
+		}
+		if(typeid(*enemies[i]).name() == typeid(EnemyBullet).name()) {
+			if(player->collidesWithItem(enemies[i])) {
+				score -= 100 * combo;
+				delete enemies[i];
+				enemies.erase(enemies.begin() + i);
+				i--;
+				continue;
+			}
 		}
 	}
 	for(unsigned int i = 0; i < bullets.size(); i++) {
@@ -544,7 +578,7 @@ void MainWindow::handleMoveTimer() {
  */
 void MainWindow::handleCreateTimer() {
 	Thing* enemy;
-	switch(rand() % 10) {
+	switch(rand() % 13) {
 		case 0:
 		case 1:
 		case 2:
@@ -567,6 +601,13 @@ void MainWindow::handleCreateTimer() {
 			enemy->setPos(rand() % (WINDOW_X - enemy->pixmap().width()), enemy->pixmap().height() * -1);
 			break;
 		case 9:
+		case 10:
+		case 11:
+			enemy = new FollowingEnemy();
+			enemy->setPixmap(QPixmap("follow.png"));
+			enemy->setPos(rand() % (WINDOW_X - enemy->pixmap().width()), enemy->pixmap().height() * -1);
+			break;
+		case 12:
 			enemy = new Blimp();
 			enemy->setPixmap(QPixmap("blimp.png"));
 			enemy->setPos(enemy->pixmap().width() * -1, 50);
